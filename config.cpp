@@ -1,7 +1,11 @@
-#define MYVERSION "1.131"
+#define MYVERSION "1.132"
 
 /*
 	change log
+
+2012-08-12 19:37 UTC - kode54
+- Lifted updated sample block decompression code from VGMPlay
+- Version is now 1.132
 
 2012-08-12 06:58 UTC - kode54
 - Corrected some assumptions when dealing with VGM header sizes
