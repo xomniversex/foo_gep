@@ -1,7 +1,12 @@
-#define MYVERSION "1.129"
+#define MYVERSION "1.130"
 
 /*
 	change log
+
+2012-08-12 07:30 UTC - kode54
+- Fixed VGM YM2612 PCM playback
+- Corrected VGM YM2612 PCM volume level
+- Version is now 1.130
 
 2012-08-11 04:41 UTC - kode54
 - Fixed VGM initialization order of PCM versus FM chips
