@@ -1,9 +1,14 @@
-#define MYVERSION "1.130"
+#define MYVERSION "1.131"
 
 /*
 	change log
 
-2012-08-12 07:30 UTC - kode54
+2012-08-12 06:58 UTC - kode54
+- Corrected some assumptions when dealing with VGM header sizes
+- VGM DAC streaming control now properly interleaves with normal register write commands
+- Version is now 1.131
+
+2012-08-12 04:30 UTC - kode54
 - Fixed VGM YM2612 PCM playback
 - Corrected VGM YM2612 PCM volume level
 - Version is now 1.130
