@@ -1,7 +1,12 @@
-#define MYVERSION "1.134"
+#define MYVERSION "1.135"
 
 /*
 	change log
+
+2012-08-13 05:21 UTC - kode54
+- Reduced YM2151 and YM2413 output volume levels
+- Moved VGM C140 initialization below FM initialization
+- Version is now 1.135
 
 2012-08-13 02:00 UTC - kode54
 - Fixed VGM YM2612 buffered PCM plus delay command by interleaving it with the rest of the buffered data
