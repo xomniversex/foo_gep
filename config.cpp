@@ -1,7 +1,12 @@
-#define MYVERSION "1.133"
+#define MYVERSION "1.134"
 
 /*
 	change log
+
+2012-08-13 02:00 UTC - kode54
+- Fixed VGM YM2612 buffered PCM plus delay command by interleaving it with the rest of the buffered data
+- DAC streaming control is now updated before any related commands are executed
+- Version is now 1.134
 
 2012-08-13 00:36 UTC - kode54
 - Restructured YM2612 emulators a bit and reinstated the faster Gens core as a compile-time option
