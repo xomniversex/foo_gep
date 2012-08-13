@@ -1,7 +1,14 @@
-#define MYVERSION "1.132"
+#define MYVERSION "1.133"
 
 /*
 	change log
+
+2012-08-13 00:36 UTC - kode54
+- Restructured YM2612 emulators a bit and reinstated the faster Gens core as a compile-time option
+- Added dummy render calls before MAME YM2612 register writes to give the emulator time to update
+  internal structures between normally instantaneous updates, which fixes missing notes in some
+  VGM dumps
+- Version is now 1.133
 
 2012-08-12 19:37 UTC - kode54
 - Lifted updated sample block decompression code from VGMPlay
