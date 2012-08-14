@@ -1,7 +1,14 @@
-#define MYVERSION "1.137"
+#define MYVERSION "1.138"
 
 /*
 	change log
+
+2012-08-14 23:37 UTC - kode54
+- Corrected chip resampler buffer size calculation
+- Implemented chip resampler gain control
+- Implemented dual PSG, YM2151, YM2203, YM3812, YM2413, YM2612, and YMF262
+- Corrected chip clock rate reporting and added chip count reporting
+- Version is now 1.138
 
 2012-08-14 02:06 UTC - kode54
 - Implemented VGM support for YMZ280B
