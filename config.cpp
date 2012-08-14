@@ -1,7 +1,11 @@
-#define MYVERSION "1.136"
+#define MYVERSION "1.137"
 
 /*
 	change log
+
+2012-08-14 02:06 UTC - kode54
+- Implemented VGM support for YMZ280B
+- Version is now 1.137
 
 2012-08-14 01:01 UTC - kode54
 - Implemented VGM support for YM2203, YM3812, and YMF262
