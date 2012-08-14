@@ -131,9 +131,24 @@ void update_fm_rates( byte const* p, size_t size, Vgm_Emu::header_t & header )
 	}
 }
 
-inline void set_freq( file_info & p_info, const char * p_name, int freq )
+inline void set_int( file_info & p_info, const char * p_name, int val )
 {
-	if ( freq > 0 ) p_info.info_set_int( p_name, freq );
+	if ( val ) p_info.info_set_int( p_name, val );
+}
+
+inline void set_freq( file_info & p_info, const char * p_chip_name, int freq )
+{
+	if ( freq )
+	{
+		pfc::string8 name2;
+		pfc::string8 name = "VGM_";
+		name += p_chip_name;
+		name2 = name;
+		name += "_RATE";
+		name2 += "_COUNT";
+		p_info.info_set_int( name, freq & 0xBFFFFFFF );
+		p_info.info_set_int( name2, (freq & 0x40000000) ? 2 : 1 );
+	}
 }
 
 class input_vgm : public input_gep
@@ -399,65 +414,67 @@ public:
 		int version = get_le32( m_header.version );
 		p_info.info_set( "VGM_VERSION", pfc::string_formatter() << pfc::format_int( version >> 8, 0, 16 ) << "." << pfc::format_int( version & 0xFF, 2, 16 ) );
 
-		set_freq( p_info, "VGM_YM2413_RATE", get_le32( m_header.ym2413_rate ) );
-		set_freq( p_info, "VGM_FRAME_RATE", get_le32( m_header.frame_rate ) );
-		set_freq( p_info, "VGM_SN76489_RATE", get_le32( m_header.psg_rate ) );
-		if ( get_le32( m_header.psg_rate ) > 0 )
+		set_freq( p_info, "YM2413", get_le32( m_header.ym2413_rate ) );
+		set_int( p_info, "VGM_FRAME_RATE", get_le32( m_header.frame_rate ) );
+		set_freq( p_info, "SN76489", get_le32( m_header.psg_rate ) );
+		if ( get_le32( m_header.psg_rate ) )
 		{
 			p_info.info_set_int( "VGM_SN76489_FLAGS", m_header.sn76489_flags );
 			if ( get_le16( m_header.noise_feedback ) )
 				p_info.info_set( "VGM_NOISE_FEEDBACK", pfc::format_int( get_le16( m_header.noise_feedback ), 4, 16 ) );
 			set_freq( p_info, "VGM_NOISE_WIDTH", m_header.noise_width );
 		}
-		set_freq( p_info, "VGM_YM2612_RATE", get_le32( m_header.ym2612_rate ) );
-		set_freq( p_info, "VGM_YM2151_RATE", get_le32( m_header.ym2151_rate ) );
-		set_freq( p_info, "VGM_SEGAPCM_RATE", get_le32( m_header.segapcm_rate ) );
-		set_freq( p_info, "VGM_RF5C68_RATE", get_le32( m_header.rf5c68_rate ) );
-		set_freq( p_info, "VGM_YM2203_RATE", get_le32( m_header.ym2203_rate ) );
-		set_freq( p_info, "VGM_YM2608_RATE", get_le32( m_header.ym2608_rate ) );
-		set_freq( p_info, "VGM_YM2610_RATE", get_le32( m_header.ym2610_rate ) );
-		set_freq( p_info, "VGM_YM3812_RATE", get_le32( m_header.ym3812_rate ) );
-		set_freq( p_info, "VGM_YM3526_RATE", get_le32( m_header.ym3526_rate ) );
-		set_freq( p_info, "VGM_Y8950_RATE", get_le32( m_header.y8950_rate ) );
-		set_freq( p_info, "VGM_YMF262_RATE", get_le32( m_header.ymf262_rate ) );
-		set_freq( p_info, "VGM_YMF278B_RATE", get_le32( m_header.ymf278b_rate ) );
-		set_freq( p_info, "VGM_YMF271_RATE", get_le32( m_header.ymf271_rate ) );
-		set_freq( p_info, "VGM_YMZ280B_RATE", get_le32( m_header.ymz280b_rate ) );
-		set_freq( p_info, "VGM_RF5C164_RATE", get_le32( m_header.rf5c164_rate ) );
-		set_freq( p_info, "VGM_PWM_RATE", get_le32( m_header.pwm_rate ) );
-		set_freq( p_info, "VGM_AY8910_RATE", get_le32( m_header.ay8910_rate ) );
-		if ( get_le32( m_header.ay8910_rate ) > 0 || get_le32( m_header.ym2203_rate ) > 0 || get_le32( m_header.ym2608_rate ) > 0 )
+		set_freq( p_info, "YM2612", get_le32( m_header.ym2612_rate ) );
+		set_freq( p_info, "YM2151", get_le32( m_header.ym2151_rate ) );
+		set_freq( p_info, "SEGAPCM", get_le32( m_header.segapcm_rate ) );
+		set_freq( p_info, "RF5C68", get_le32( m_header.rf5c68_rate ) );
+		set_freq( p_info, "YM2203", get_le32( m_header.ym2203_rate ) );
+		set_freq( p_info, "YM2608", get_le32( m_header.ym2608_rate ) );
+		set_freq( p_info, "YM2610", get_le32( m_header.ym2610_rate ) );
+		set_freq( p_info, "YM3812", get_le32( m_header.ym3812_rate ) );
+		set_freq( p_info, "YM3526", get_le32( m_header.ym3526_rate ) );
+		set_freq( p_info, "Y8950", get_le32( m_header.y8950_rate ) );
+		set_freq( p_info, "YMF262", get_le32( m_header.ymf262_rate ) );
+		set_freq( p_info, "YMF278B", get_le32( m_header.ymf278b_rate ) );
+		set_freq( p_info, "YMF271", get_le32( m_header.ymf271_rate ) );
+		set_freq( p_info, "YMZ280B", get_le32( m_header.ymz280b_rate ) );
+		set_int( p_info, "VGM_RF5C164_RATE", get_le32( m_header.rf5c164_rate ) );
+		set_int( p_info, "VGM_PWM_RATE", get_le32( m_header.pwm_rate ) );
+		set_freq( p_info, "AY8910", get_le32( m_header.ay8910_rate ) );
+		if ( get_le32( m_header.ay8910_rate ) || get_le32( m_header.ym2203_rate ) || get_le32( m_header.ym2608_rate ) )
 		{
 			p_info.info_set_int( "VGM_AY8910_TYPE", m_header.ay8910_type );
 			p_info.info_set_int( "VGM_AY8910_FLAGS", m_header.ay8910_flags );
-			if ( get_le32( m_header.ym2203_rate ) > 0 )
+			if ( get_le32( m_header.ym2203_rate ) )
 				p_info.info_set_int( "VGM_YM2203_AY8910_FLAGS", m_header.ym2203_ay8910_flags );
-			if ( get_le32( m_header.ym2608_rate ) > 0 )
+			if ( get_le32( m_header.ym2608_rate ) )
 				p_info.info_set_int( "VGM_YM2608_AY8910_FLAGS", m_header.ym2608_ay8910_flags );
 		}
 		if ( volume_modifier != 1.0 )
 			p_info.info_set_float( "VGM_VOLUME_MODIFIER", volume_modifier, 3 );
-		set_freq( p_info, "VGM_LOOP_BASE", m_header.loop_base );
-		set_freq( p_info, "VGM_LOOP_MODIFIER", m_header.loop_modifier );
-		set_freq( p_info, "VGM_GBDMG_RATE", get_le32( m_header.gbdmg_rate ) );
-		set_freq( p_info, "VGM_NESAPU_RATE", get_le32( m_header.nesapu_rate ) );
-		set_freq( p_info, "VGM_MULTIPCM_RATE", get_le32( m_header.multipcm_rate ) );
-		set_freq( p_info, "VGM_UPD7759_RATE", get_le32( m_header.upd7759_rate ) );
-		set_freq( p_info, "VGM_OKIM6258_RATE", get_le32( m_header.okim6258_rate ) );
-		if ( get_le32( m_header.okim6258_rate ) > 0 )
+		set_int( p_info, "VGM_LOOP_BASE", m_header.loop_base );
+		set_int( p_info, "VGM_LOOP_MODIFIER", m_header.loop_modifier );
+		set_freq( p_info, "GBDMG", get_le32( m_header.gbdmg_rate ) );
+		set_freq( p_info, "NESAPU", get_le32( m_header.nesapu_rate ) );
+		set_freq( p_info, "MULTIPCM", get_le32( m_header.multipcm_rate ) );
+		set_freq( p_info, "UPD7759", get_le32( m_header.upd7759_rate ) );
+		set_freq( p_info, "OKIM6258", get_le32( m_header.okim6258_rate ) );
+		if ( get_le32( m_header.okim6258_rate ) )
 			p_info.info_set_int( "VGM_OKIM6258_FLAGS", m_header.okim6258_flags );
-		set_freq( p_info, "VGM_K054539_RATE", get_le32( m_header.k054539_rate ) );
-		if ( get_le32( m_header.k054539_rate ) > 0 )
+		set_freq( p_info, "K054539", get_le32( m_header.k054539_rate ) );
+		if ( get_le32( m_header.k054539_rate ) )
 			p_info.info_set_int( "VGM_K054539_FLAGS", m_header.k054539_flags );
-		set_freq( p_info, "VGM_C140_RATE", get_le32( m_header.c140_rate ) );
-		if ( get_le32( m_header.c140_rate ) > 0 )
+		set_freq( p_info, "C140", get_le32( m_header.c140_rate ) );
+		if ( get_le32( m_header.c140_rate ) )
 			p_info.info_set_int( "VGM_C140_TYPE", m_header.c140_type );
-		set_freq( p_info, "VGM_OKIM6295_RATE", get_le32( m_header.okim6295_rate ) & 0x3FFFFFFF );
-		set_freq( p_info, "VGM_K051649_RATE", get_le32( m_header.k051649_rate ) );
-		set_freq( p_info, "VGM_HUC6280_RATE", get_le32( m_header.huc6280_rate ) );
-		set_freq( p_info, "VGM_K053260_RATE", get_le32( m_header.k053260_rate ) );
-		set_freq( p_info, "VGM_POKEY_RATE", get_le32( m_header.pokey_rate ) );
-		set_freq( p_info, "VGM_QSOUND_RATE", get_le32( m_header.qsound_rate ) );
+		set_freq( p_info, "OKIM6295", get_le32( m_header.okim6295_rate ) & 0x7FFFFFFF );
+		if ( get_le32( m_header.okim6295_rate ) )
+			p_info.info_set_int( "VGM_OKIM6295_DIVIDER", (m_header.okim6295_rate[3] & 0x80) ? 132 : 165 );
+		set_freq( p_info, "K051649", get_le32( m_header.k051649_rate ) );
+		set_freq( p_info, "HUC6280", get_le32( m_header.huc6280_rate ) );
+		set_freq( p_info, "K053260", get_le32( m_header.k053260_rate ) );
+		set_freq( p_info, "POKEY", get_le32( m_header.pokey_rate ) );
+		set_freq( p_info, "QSOUND", get_le32( m_header.qsound_rate ) );
 
 		int size = 0;
 		const unsigned char * gd3_tag;
