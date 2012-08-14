@@ -327,7 +327,15 @@ public:
 				update_fm_rates( buffer.get_ptr(), body_size, m_header );
 			}
 
-			volume_modifier = pow( 2.0, (double)m_header.volume_modifier / 32.0 );
+			int TempSLng;
+			if (m_header.volume_modifier <= 0xC0)
+				TempSLng = m_header.volume_modifier;
+			else if (m_header.volume_modifier == (0xC0 + 0x01))
+				TempSLng = 0xC0 - 0x100;
+			else
+				TempSLng = m_header.volume_modifier - 0x100;
+
+			volume_modifier = pow( 2.0, (double)TempSLng / 32.0 );
 		}
 	}
 
@@ -444,7 +452,7 @@ public:
 		set_freq( p_info, "VGM_C140_RATE", get_le32( m_header.c140_rate ) );
 		if ( get_le32( m_header.c140_rate ) > 0 )
 			p_info.info_set_int( "VGM_C140_TYPE", m_header.c140_type );
-		set_freq( p_info, "VGM_OKIM6295_RATE", get_le32( m_header.okim6295_rate ) );
+		set_freq( p_info, "VGM_OKIM6295_RATE", get_le32( m_header.okim6295_rate ) & 0x3FFFFFFF );
 		set_freq( p_info, "VGM_K051649_RATE", get_le32( m_header.k051649_rate ) );
 		set_freq( p_info, "VGM_HUC6280_RATE", get_le32( m_header.huc6280_rate ) );
 		set_freq( p_info, "VGM_K053260_RATE", get_le32( m_header.k053260_rate ) );

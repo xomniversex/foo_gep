@@ -1,7 +1,17 @@
-#define MYVERSION "1.135"
+#define MYVERSION "1.136"
 
 /*
 	change log
+
+2012-08-14 01:01 UTC - kode54
+- Implemented VGM support for YM2203, YM3812, and YMF262
+- Corrected VGM volume level adjustment calculation
+- Version is now 1.136
+
+2012-08-13 09:46 UTC - kode54
+- Implemented secondary resampler so VGM PCM chips are resampled to the FM mix rate
+- Reset YM2413 volume level
+- Implemented VGM support for OKIM6258, OKIM6295, K051649, K053260, and K054539
 
 2012-08-13 05:21 UTC - kode54
 - Reduced YM2151 and YM2413 output volume levels
