@@ -1,7 +1,11 @@
-#define MYVERSION "1.138"
+#define MYVERSION "1.139"
 
 /*
 	change log
+
+2012-08-15 04:09 UTC - kode54
+- Implemented VGM support for YM2610/B
+- Version is now 1.139
 
 2012-08-14 23:37 UTC - kode54
 - Corrected chip resampler buffer size calculation

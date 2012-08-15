@@ -430,7 +430,7 @@ public:
 		set_freq( p_info, "RF5C68", get_le32( m_header.rf5c68_rate ) );
 		set_freq( p_info, "YM2203", get_le32( m_header.ym2203_rate ) );
 		set_freq( p_info, "YM2608", get_le32( m_header.ym2608_rate ) );
-		set_freq( p_info, "YM2610", get_le32( m_header.ym2610_rate ) );
+		set_freq( p_info, "YM2610", get_le32( m_header.ym2610_rate ) & 0x7FFFFFFF );
 		set_freq( p_info, "YM3812", get_le32( m_header.ym3812_rate ) );
 		set_freq( p_info, "YM3526", get_le32( m_header.ym3526_rate ) );
 		set_freq( p_info, "Y8950", get_le32( m_header.y8950_rate ) );
