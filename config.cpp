@@ -1,7 +1,11 @@
-#define MYVERSION "1.139"
+#define MYVERSION "1.140"
 
 /*
 	change log
+
+2012-08-15 06:30 UTC - kode54
+- Improved chip access guards
+- Version is now 1.140
 
 2012-08-15 04:09 UTC - kode54
 - Implemented VGM support for YM2610/B
