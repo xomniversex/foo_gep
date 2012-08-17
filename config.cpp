@@ -1,7 +1,18 @@
-#define MYVERSION "1.140"
+#define MYVERSION "1.141"
 
 /*
 	change log
+
+2012-08-17 01:47 UTC - kode54
+- Adjusted various volume levels
+- Added CP System type detection to OKIM6295 volume level adjustment
+- Fixed VGM header processing in Vgm_File info reader
+- Version is now 1.141
+
+2012-08-17 01:12 UTC - kode54
+- Fixed chip resampler gain calculation to prevent clipping
+- Implemented YM2608 support
+- Fixed YM2610 support
 
 2012-08-15 06:30 UTC - kode54
 - Improved chip access guards
