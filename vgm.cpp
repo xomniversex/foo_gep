@@ -427,7 +427,7 @@ public:
 		set_freq( p_info, "YM2612", get_le32( m_header.ym2612_rate ) );
 		set_freq( p_info, "YM2151", get_le32( m_header.ym2151_rate ) );
 		set_freq( p_info, "SEGAPCM", get_le32( m_header.segapcm_rate ) );
-		set_freq( p_info, "RF5C68", get_le32( m_header.rf5c68_rate ) );
+		set_int( p_info, "VGM_RF5C68_RATE", get_le32( m_header.rf5c68_rate ) );
 		set_freq( p_info, "YM2203", get_le32( m_header.ym2203_rate ) );
 		set_freq( p_info, "YM2608", get_le32( m_header.ym2608_rate ) );
 		set_freq( p_info, "YM2610", get_le32( m_header.ym2610_rate ) & 0x7FFFFFFF );
