@@ -254,15 +254,14 @@ public:
 		if (tag_song_ms < 0) tag_song_ms = cfg_default_length;
 		if (tag_fade_ms < 0) tag_fade_ms = cfg_default_fade;
 
-		input_gep::decode_initialize( p_subsong, p_flags, p_abort );
+		emu->core().enable_w4011_( !ignore_w4011 );
 
-		emu->core().nes_apu()->enable_w4011_( !ignore_w4011 );
+		input_gep::decode_initialize( p_subsong, p_flags, p_abort );
 	}
 
 	void decode_seek( double p_seconds, abort_callback & p_abort )
 	{
 		input_gep::decode_seek( p_seconds, p_abort );
-		(( Nsf_Emu * )emu)->core().nes_apu()->enable_w4011_( !ignore_w4011 );
 	}
 
 	void retag_set_info( t_uint32 p_subsong, const file_info & p_info, abort_callback & p_abort )

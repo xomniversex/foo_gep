@@ -1,7 +1,11 @@
-#define MYVERSION "1.141"
+#define MYVERSION "1.142"
 
 /*
 	change log
+
+2012-08-18 02:56 UTC - kode54
+- Fixed NSF 4011 writes control
+- Version is now 1.142
 
 2012-08-17 01:47 UTC - kode54
 - Adjusted various volume levels
