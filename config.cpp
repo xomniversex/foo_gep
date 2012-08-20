@@ -1,7 +1,11 @@
-#define MYVERSION "1.142"
+#define MYVERSION "1.143"
 
 /*
 	change log
+
+2012-08-20 15:24 UTC - kode54
+- Hopefully fixed VGM muting on replay
+- Version is now 1.143
 
 2012-08-18 02:56 UTC - kode54
 - Fixed NSF 4011 writes control

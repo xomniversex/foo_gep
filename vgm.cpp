@@ -366,20 +366,15 @@ public:
 		Vgm_Emu * emu = ( Vgm_Emu * ) this->emu;
 		if ( ! emu )
 		{
-			this->emu = emu = new Vgm_Emu();
-			emu->disable_oversampling();
-			setup_effects( false );
+			emu = new Vgm_Emu();
 
 			try
 			{
 				m_file->seek( 0, p_abort );
 				foobar_Data_Reader rdr( m_file, p_abort );
 
-				emu->set_gain( volume_modifier );
 				ERRCHK( emu->set_sample_rate( sample_rate ) );
 				ERRCHK( emu->load( rdr ) );
-				handle_warning();
-				emu->start_track( 0 );
 				handle_warning();
 			}
 			catch(...)
@@ -387,7 +382,7 @@ public:
 				if ( emu )
 				{
 					delete emu;
-					this->emu = emu = NULL;
+					emu = NULL;
 				}
 				throw;
 			}
@@ -485,6 +480,7 @@ public:
 		{
 			process_gd3_tag( gd3_tag, size, p_info );
 		}
+		if ( !this->emu ) delete emu;
 	}
 
 	void decode_initialize( t_uint32 p_subsong, unsigned p_flags, abort_callback & p_abort )
