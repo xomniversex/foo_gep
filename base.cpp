@@ -104,9 +104,9 @@ input_gep::~input_gep()
 	if ( monitoring ) monitor_stop();
 }
 
-void input_gep::handle_warning()
+void input_gep::handle_warning(gme_t * emu)
 {
-	const char * s = emu->warning();
+	const char * s = emu ? emu->warning() : this->emu->warning();
 	if ( s )
 	{
 		pfc::string8 path;

@@ -1,7 +1,11 @@
-#define MYVERSION "1.143"
+#define MYVERSION "1.144"
 
 /*
 	change log
+
+2012-08-21 15:59 UTC - kode54
+- Fixed VGM info retrieval crash
+- Version is now 1.144
 
 2012-08-20 15:24 UTC - kode54
 - Hopefully fixed VGM muting on replay

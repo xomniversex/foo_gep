@@ -375,7 +375,7 @@ public:
 
 				ERRCHK( emu->set_sample_rate( sample_rate ) );
 				ERRCHK( emu->load( rdr ) );
-				handle_warning();
+				handle_warning(emu);
 			}
 			catch(...)
 			{

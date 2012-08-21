@@ -55,7 +55,7 @@ protected:
 	pfc::string_simple          m_path;
 	t_filestats                 m_stats;
 
-	void handle_warning();
+	void handle_warning(gme_t * emu = NULL);
 
 	void meta_add( file_info & p_info, const char * name, const char * value, t_size max );
 
