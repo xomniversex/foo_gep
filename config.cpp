@@ -1,7 +1,11 @@
-#define MYVERSION "1.146"
+#define MYVERSION "1.147"
 
 /*
 	change log
+
+2012-08-23 20:27 UTC - kode54
+- Fixed a crash in VGM input
+- Version is now 1.147
 
 2012-08-23 03:14 UTC - kode54
 - Fixed some AY chip types' pitch

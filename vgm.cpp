@@ -386,8 +386,6 @@ public:
 				}
 				throw;
 			}
-
-			m_file.release();
 		}
 
 		int song_len = get_le32( m_header.track_duration );
