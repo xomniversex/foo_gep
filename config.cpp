@@ -1,7 +1,11 @@
-#define MYVERSION "1.145"
+#define MYVERSION "1.146"
 
 /*
 	change log
+
+2012-08-23 03:14 UTC - kode54
+- Fixed some AY chip types' pitch
+- Version is now 1.146
 
 2012-08-23 02:58 UTC - kode54
 - Fixed VGM attached AY chip resetting
