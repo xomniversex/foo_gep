@@ -1,7 +1,12 @@
-#define MYVERSION "1.144"
+#define MYVERSION "1.145"
 
 /*
 	change log
+
+2012-08-23 02:58 UTC - kode54
+- Fixed VGM attached AY chip resetting
+- Implemented VGM support for stand-alone AY chip
+- Version is now 1.145
 
 2012-08-21 15:59 UTC - kode54
 - Fixed VGM info retrieval crash

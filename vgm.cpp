@@ -440,7 +440,43 @@ public:
 		set_freq( p_info, "AY8910", get_le32( m_header.ay8910_rate ) );
 		if ( get_le32( m_header.ay8910_rate ) || get_le32( m_header.ym2203_rate ) || get_le32( m_header.ym2608_rate ) )
 		{
-			p_info.info_set_int( "VGM_AY8910_TYPE", m_header.ay8910_type );
+			pfc::string8 ay_type;
+			switch(m_header.ay8910_type)
+			{
+			case 0x00:
+				ay_type = "AY-3-8910A";
+				break;
+			case 0x01:
+				ay_type = "AY-3-8912A";
+				break;
+			case 0x02:
+				ay_type = "AY-3-8913A";
+				break;
+			case 0x03:
+				ay_type = "AY8930";
+				break;
+			case 0x04:
+				ay_type = "AY-3-8914";
+				break;
+			case 0x10:
+				ay_type = "YM2149";
+				break;
+			case 0x11:
+				ay_type = "YM3439";
+				break;
+			case 0x12:
+				ay_type = "YMZ284";
+				break;
+			case 0x13:
+				ay_type = "YMZ294";
+				break;
+
+			default:
+				ay_type = "Unknown (0x";
+				ay_type += pfc::format_int( m_header.ay8910_type, 0, 16 );
+				ay_type += ")";
+			}
+			p_info.info_set( "VGM_AY8910_TYPE", ay_type );
 			p_info.info_set_int( "VGM_AY8910_FLAGS", m_header.ay8910_flags );
 			if ( get_le32( m_header.ym2203_rate ) )
 				p_info.info_set_int( "VGM_YM2203_AY8910_FLAGS", m_header.ym2203_ay8910_flags );
